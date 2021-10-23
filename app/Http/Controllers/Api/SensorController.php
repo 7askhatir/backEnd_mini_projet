@@ -24,13 +24,15 @@ class SensorController extends Controller
 
     public function store(Request $request) {
 
-        $request->validate([
-            'photo' => 'required',
-        ]);
+        // $request->validate([
+        //     'photo' => 'required',
+        // ]);
         
         $sensor = new Sensor([
             'photo' => $request->photo,
+            'reference_id' => $request->reference_id
         ]);
+
         $id = $request->device_id;
         $device = Device::findOrFail($id);
         $device->sensor()->save($sensor);

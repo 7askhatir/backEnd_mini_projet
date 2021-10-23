@@ -17,10 +17,6 @@ class Reference extends Model
         'label'
     ];
 
-    public function sensor() 
-    {
-        return $this->hasMany(Sensor::class);
-    }
 
     public function references()
     {
@@ -30,6 +26,11 @@ class Reference extends Model
     public function childReferences()
     {
         return $this->hasMany(Reference::class, 'parent_id')->with('references');
+    }
+
+    public function sensor()
+    {
+        return $this->HasOne(Sensor::class);
     }
    
 }

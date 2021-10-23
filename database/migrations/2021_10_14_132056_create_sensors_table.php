@@ -16,9 +16,8 @@ class CreateSensorsTable extends Migration
         Schema::create('sensors', function (Blueprint $table) {
             $table->id();
             $table->string('photo');
-            $table->integer('reference_id')->nullable();
-            $table->string('type');
-            $table->foreignId('device_id')->references('id')->on('devices')->onDelete('cascade');
+            $table->integer('reference_id');
+            $table->foreignId('device_id')->devices('id')->on('devices')->onDelete('cascade');
             $table->timestamps();
         });
     }

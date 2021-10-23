@@ -14,12 +14,16 @@ class Sensor extends Model
     protected $fillable = [
         'photo',
         'reference_id',
-        'type',
         'device_id'
     ];
 
     public function device()
     {
         return $this->belongsTo(Device::class);
+    }
+    public function reference(){
+
+        return $this->belongsTo(Reference::class);
+
     }
 }

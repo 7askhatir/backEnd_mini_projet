@@ -12,32 +12,17 @@ use App\Http\Controllers\Controller;
 class ReferenceController extends Controller
 {
 
-    public function getReferences()
-    {
-        $devices = Device::all();
-        // $sensors = Sensor::all();
-        $reference = new Reference([
-            'code' => 'brand'
-        ]);
-        foreach($devices as $device){
-            $brand = $device->brand;
-
-            $reference = new Reference([
-                'code' => Str::upper(Str::substr($brand, 0,3)),
-                'label' => $device->brand 
-            ]);
-            if($loop->last){
-               
-            }
-            $reference->save();
-        }
-
-        $references = Reference::whereNull('parent_id')
-            ->with('childReferences')
-            ->orderby('code', 'asc')
-            ->get();
-        return response()->json($references);
+    public function index(){
+        //reads all reference in the database
+        $reference = Reference::with('references')->get();
+        return response()->json($reference);
     }
+  
+    public function show($id){
+      //find a reference by id if not it throws an expetion
+      $reference = Reference::findOrFail($id);
+      return response()->json($reference);
+  }
 
    
 }

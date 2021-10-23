@@ -24,4 +24,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('devices', DeviceController::class);
 Route::apiResource('sensors', SensorController::class);
 
- Route::get('reference', [ReferenceController::class, 'getReferences']);
+ Route::get('reference', [ReferenceController::class, 'index']);
+ Route::get('reference/{id}',[ReferenceController::class,'show']);
